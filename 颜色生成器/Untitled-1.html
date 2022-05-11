@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Generator</title>
+    <link rel="stylesheet" href="Untitled-1.css" />
+</head>
+<body>
+    <h1>Color Factory</h1>
+    <div class="board">
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+        <div class="colorBoard">
+            <div class="color"></div>
+            <div class="text">#0f0af7</div>
+        </div>
+    </div>
+    <button>Generate Color Palette</button>
+    <div id="popUp" style = "display: none;"></div>
+</body>
+<script>
+    function generate() {
+        var board = document.querySelector('.board');
+        for(let i = 0; i < board.children.length; i++){
+            var randomColor = '#' + Math.floor(Math.random() * 0xffffff).toString(16).padEnd(6, '0');
+            // padStart()和padStart()一共接受两个参数，第一个参数用来指定字符串的最小长度，第二个参数是用来补全的字符串。
+            board.children[i].children[0].style.backgroundColor = randomColor;
+            board.children[i].children[1].innerHTML = randomColor;
+        }
+    }
+    document.querySelector('button').addEventListener('click', generate);
+    generate();
+    var colorBoard = Array.from(document.querySelectorAll('.colorBoard'));
+    colorBoard.forEach(item => {
+        item.onclick = async () => {
+            var color = item.children[1].innerHTML;
+            document.querySelector('body').style.backgroundColor = color;
+            item.style.boxShadow = '0 2px 16px 0 rgba(27,35,47,0.4)';
+            var pop = document.querySelector('#popUp');
+            try{
+                await navigator.clipboard.writeText(color);
+                pop.innerHTML = `Color ${color} copied to your clipboard`;
+                pop.style.display = 'block';
+                setTimeout(()=>{pop.style.display = 'none';},3000);
+            } catch(err) {
+                console.log('Faild to copy: ', err);
+            }
+        }
+    })
+</script>
+</html>
